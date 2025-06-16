@@ -3,9 +3,14 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
   define: {
     'process.env.NODE_ENV': '"production"',
+    'process.env': '{}',
+  },
+  resolve: {
+    alias: {
+      process: 'process/browser',
+    },
   },
   build: {
     lib: {
@@ -13,14 +18,6 @@ export default defineConfig({
       name: 'AnseraChatWidget',
       fileName: () => `widget.js`,
       formats: ['iife'],
-    },
-    rollupOptions: {
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
   },
 })
