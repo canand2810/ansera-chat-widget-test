@@ -5,19 +5,18 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env.NODE_ENV': '"production"',
-    'process.env': '{}',
-  },
-  resolve: {
-    alias: {
-      process: 'process/browser',
-    },
+    'process.env': '{}', // ensure this is still here
   },
   build: {
     lib: {
       entry: 'src/main.jsx',
       name: 'AnseraChatWidget',
       fileName: () => `widget.js`,
-      formats: ['iife'],
+      formats: ['iife'], // good for CDN <script> tags
+    },
+    rollupOptions: {
+      // ❌ remove this if it exists:
+      // external: ['react', 'react-dom'],
     },
   },
 })
