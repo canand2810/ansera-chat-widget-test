@@ -10,9 +10,7 @@ lerna-debug.log*
 # Dependency directories
 node_modules/
 
-# Production build files
-dist/
-build/ # Though Vite uses 'dist', some setups or legacy scripts might use 'build'
+
 
 # Temporary files
 .vite/ # Vite's own internal cache and temporary files
