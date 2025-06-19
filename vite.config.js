@@ -12,11 +12,12 @@ export default defineConfig({
     'process.env.NODE_ENV': JSON.stringify('production'), // ✅ Fix for process reference
   },
   build: {
+    outDir: 'dist',
     lib: {
-      entry: resolve(__dirname, 'src/ChatWidget.jsx'),
-      name: 'MyChatWidget',
-      fileName: () => 'my-chat-widget.umd.js',
-      formats: ['umd'],
+      entry: resolve(__dirname, 'src/embed.jsx'),
+      name: 'EmbedChatWidget',
+      fileName: () => 'embed.js',
+      formats: ['iife'], // IIFE allows it to be loaded directly in browser
     },
     rollupOptions: {
       external: [],

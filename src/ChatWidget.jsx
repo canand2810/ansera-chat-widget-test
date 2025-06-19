@@ -1,33 +1,48 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom/client";
-
+import React, { useState } from "react";
 
 const ChatWidget = () => {
-  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && message.trim()) {
+      alert(`You typed: ${message}`);
+      setMessage(""); // clear the input
+    }
+  };
 
   return (
-    <div style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 9999 }}>
-      {open && (
-        <div style={{ width: 300, height: 400, background: "#fff", border: "1px solid #ccc", borderRadius: 8 }}>
-          <p style={{ padding: 10 }}>Hello! How can I help you?</p>
-        </div>
-      )}
-      <button
-        onClick={() => setOpen(!open)}
-        style={{ padding: "10px", borderRadius: "50%", background: "#007bff", color: "#fff", border: "none" }}
-      >
-       Click Me
-      </button>
+    <div
+      style={{
+        position: "fixed",
+        bottom: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        left: "10%",
+        width: "80%",
+        zIndex: 9999,
+        background: "#fff",
+        padding: "10px",
+        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
+        borderTop: "1px solid #ccc",
+      }}
+    >
+      <input
+        type="text"
+        placeholder="Type your message..."
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={handleKeyDown}
+        style={{
+          width: "100%",
+          padding: "10px",
+          fontSize: "16px",
+          borderRadius: "6px",
+          border: "1px solid #ccc",
+        }}
+      />
     </div>
   );
 };
 
-// Expose the init function globally
-window.initMyChatWidget = (containerId = "my-chat-root") => {
-  const container = document.getElementById(containerId) || document.body;
-  const el = document.createElement("div");
-  el.id = "chat-widget-container";
-  container.appendChild(el);
-
-  ReactDOM.createRoot(el).render(<ChatWidget />);
-};
+export default ChatWidget;
